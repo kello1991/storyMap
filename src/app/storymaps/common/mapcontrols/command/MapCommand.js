@@ -6,9 +6,12 @@ define(["lib-build/css!./MapCommand",
 		"esri/symbols/PictureMarkerSymbol",
 		"esri/layers/GraphicsLayer",
 		"esri/graphic",
-		"esri/config"
+		"esri/arcgis/utils", "esri/dijit/Print",
+		"esri/tasks/PrintTemplate", "esri/config",
+		"dojo/_base/array", "dojo/dom", "dojo/parser",
+		"dijit/layout/BorderContainer", "dijit/layout/ContentPane", "dojo/domReady!"
 	],
-	function(viewCss, has, lang, Point, on, PictureMarkerSymbol, GraphicsLayer, Graphic, esriConfig)
+	function(viewCss, has, lang, Point, on, PictureMarkerSymbol, GraphicsLayer, Graphic,  arcgisUtils, esriConfig)
 	{
 		/**
 		 * MapCommand
@@ -28,6 +31,7 @@ define(["lib-build/css!./MapCommand",
 			var homeButton = $('<div class="esriSimpleSliderIncrementButton"><div class="mapCommandHomeBtn" title="' + (i18n.viewer.mapFromCommon ? i18n.viewer.mapFromCommon.home : 'Zoom Home') + '" role="button" tabindex="0"></div></div>');
 			var locateSymbol = new PictureMarkerSymbol('app/storymaps/common/_resources/icons/mapcommand-location-marker.png', 21, 21);
 			var locateLayer = new GraphicsLayer({id: 'locateLayer'});
+			//var printBtn = $('<div id="print_button"></div>');
 
 			homeButton.on('click keydown', lang.hitch(this, function(evt) {
 				if (evt.type === 'keydown') {
@@ -46,6 +50,7 @@ define(["lib-build/css!./MapCommand",
 			}));
 
 			$(map.container).find('.esriSimpleSlider div:nth-child(1)').after(homeButton);
+
 
 			on(map, "update-start", function(){
 				if (tsUpdateStart === 0)

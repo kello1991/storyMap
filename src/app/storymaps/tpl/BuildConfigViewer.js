@@ -5,6 +5,6 @@ require(
 	],
 	function()
 	{
-		// Nothing here
+		console.log('dsfklgousdygfoqsuygfqdouy');
 	}
 );
